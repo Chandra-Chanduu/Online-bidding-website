@@ -5,12 +5,12 @@ from django.contrib.auth import login,login,authenticate
 # Create your views here.
 def register_view(request):
     if request.method=='POST':
-        form=RegistrationForm(None or request.POST)
-        if form.is_valid:
+        form=RegistrationForm(request.POST)
+        if form.is_valid():
             user=form.save()
-            #authenticate(request,user)
+            authenticate(user)
             login(request,user)
-            redirect('')
+            return redirect('/home')
     else:
         form=RegistrationForm()
     return render(request,"registration/register.html",{'form':form})
