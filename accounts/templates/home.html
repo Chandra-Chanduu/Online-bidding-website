@@ -3,5 +3,16 @@
 {%block title%}Home Page{%endblock%}
 
 {%block body %}
-    <p>Want to add a poduct  <a href='/add-product'>Click Here</a></p>
+    {% if products%}
+        {% for product in products%}
+            {% if product.approved %}
+                <p>{{product.product_name}} -- {{product.minimum_price}}</p>
+                <p>{{product.description}}</p>
+                <p><img src='{{product.image.url}}' height=100 width=100></p>
+                <form action="{ url '/bidding'}">
+                    <button type="Submit">Bid Now</button>
+                </form>
+            {%endif%}
+        {%endfor%}
+    {%endif%}
 {%endblock%}
