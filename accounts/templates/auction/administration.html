@@ -1,0 +1,28 @@
+{% extends "base.html"%}
+
+{%block title%}Administration{%endblock%}
+
+{%block body %}
+    <table border="1px">
+        <tr>
+            <th>Product Name</th>
+            <th>Product Description</th>
+        </tr>
+        {% for product in products%}
+            <tr>
+                <td> {{product.product_name}} </td>
+                <td>{{product.description}}</td>
+                <td>
+                    <form method='POST'>
+                        {%csrf_token%}
+                        {% if product.approved %}
+                            <button type='submit' class="btn btn-danger" name='approved' value='{{product.id}}'>Reject</button>
+                        {% else %}
+                            <button type='submit' class="btn btn-success" name='approved' value='{{product.id}}'>Approve</button>
+                        {%endif%}
+                    </form>
+                </td>
+            </tr>
+        {%endfor%}
+    </table>
+{%endblock%}

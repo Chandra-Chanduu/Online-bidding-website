@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+{%block title%}Login Page{%endblock%}
+{% block body%}
+<form method="POST">
+    {%csrf_token %}
+    {{form.as_p}}
+    <button type="Submit">Login</button>
+</form>
+<p>Want to Create an account <a href="/register">Register</a></p>
+{%endblock%}
